@@ -11,10 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/', 'AdvertController@index');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/advert/create', 'AdvertController@create');
+    Route::post('/advert/add', 'AdvertController@add');
+});

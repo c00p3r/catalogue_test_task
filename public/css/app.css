@@ -5786,23 +5786,32 @@ button.close {
 /*!
  * App Styles
  */
-/* Sticky footer styles
--------------------------------------------------- */
+/* Sticky footer styles */
 html {
   position: relative;
   min-height: 100%; }
 
 body {
-  /* Margin bottom by footer height */
   margin-bottom: 51px; }
 
 #footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  /* Set the fixed height of the footer here */
   height: 51px;
   border-top: 1px solid #d3e0e9;
   background-color: #fff; }
+
+/*
+* Main Content
+*/
+.advert .panel-heading .lead {
+  margin-bottom: 5px; }
+
+/*
+* Footer
+*/
+.copyright {
+  margin: 10px 0; }
 
 /*# sourceMappingURL=app.css.map */

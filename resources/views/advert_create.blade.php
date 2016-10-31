@@ -1,14 +1,16 @@
-@extends('layouts.app')
+@extends('app')
 
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">Create New Advert</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    {!! Form::model($advert, ['action' => 'AdvertController@add', 'method' => 'post']) !!}
+
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
