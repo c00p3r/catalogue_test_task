@@ -29,7 +29,7 @@ class CreateAdvertTable extends Migration
             $table->string('mileage');
             $table->string('owners');
 
-            $table->string('picture');
+            $table->string('picture')->default(config('app.upload_path') . '/no_image.png');
 
             $table->timestamps();
         });

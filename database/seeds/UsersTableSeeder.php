@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
             $date = $faker->dateTimeThisMonth();
 
             DB::table('users')->insert([
-                'email'      => $faker->email(),
+                'email'      => $faker->unique()->email(),
                 'password'   => bcrypt('secret'),
                 'created_at' => $date,
                 'updated_at' => $date,

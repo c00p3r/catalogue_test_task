@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -20,14 +22,15 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
-
+    use RegistersUsers {
+        register as trait_register;
+    }
     /**
      * Where to redirect users after login / registration.
      *
      * @var string
      */
-    protected $redirectTo = '/advert/add';
+    protected $redirectTo = '/advert/create';
 
     /**
      * Create a new controller instance.
@@ -37,6 +40,13 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    public function register(Request $request)
+    {
+        Input::merge(array_map('trim', Input::all()));
+
+        return $this->trait_register($request);
     }
 
     /**

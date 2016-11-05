@@ -25,6 +25,8 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li>
+                                {{ link_to_action('AdvertController@create', 'New Advert') }}
+                                <div class="nav-divider"></div>
                                 <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     Logout
                                 </a>

@@ -20,13 +20,13 @@ class AdvertsTableSeeder extends Seeder
             $user_id       = random_int(1, 5);
             $user_folder   = 'u_' . $user_id;
             $advert_folder = 'adv_' . $i;
-            $path          = './public/' . $upload_path . '/' . $user_folder . '/' . $advert_folder;
+            $path          = $upload_path . '/' . $user_folder . '/' . $advert_folder;
 
             if (!file_exists($path)) {
                 mkdir($path, 0777, true);
             }
 
-            $picture = str_replace('./public/', '', $faker->image($path, 480, 320, 'transport'));
+            $picture = $faker->image($path, 480, 320, 'transport');
 
             $date = $faker->dateTimeThisMonth();
 

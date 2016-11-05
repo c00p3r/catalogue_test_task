@@ -29,6 +29,8 @@
 
 @include('_header')
 
+@include('_notifications')
+
 @yield('content')
 
 @include('_footer')

@@ -5,13 +5,10 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <pre>
-            <?php print_r($errors); ?>
-            </pre>
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
-                    {!! Form::open(['url' => '/register', 'method' => 'post', 'class' => 'form-horizontal',  'role' => 'form']) !!}
+                    {!! Form::open(['url' => '/register', 'class' => 'form-horizontal']) !!}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             {!! Form::label('email', 'Email', ['class' => 'col-md-4 control-label']) !!}
@@ -20,7 +17,7 @@
                                 {!! Form::email('email', old('email'), ['class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus']) !!}
 
                                 @if ($errors->has('email'))
-                                    <span class="help-block">
+                                    <span class="form-error-block help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
