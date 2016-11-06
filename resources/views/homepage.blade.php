@@ -1,6 +1,22 @@
 @extends('app')
 
 
+@section('styles')
+    {{ Html::style('plugins\select2-4.0.3\css\select2.min.css') }}
+    {{ Html::style('plugins\select2-4.0.3\css\select2-bootstrap.css') }}
+@stop
+
+@section('scripts')
+    {{ Html::script('plugins\select2-4.0.3\js\select2.min.js') }}
+
+    <script>
+        $(function () {
+            initSelect2($('select[name=region]'), {!! $regions !!});
+            initSelect2($('select[name=city]'), {!! $cities !!});
+        });
+    </script>
+@stop
+
 @section('content')
     <!-- Begin page content -->
     <div class="container homepage">

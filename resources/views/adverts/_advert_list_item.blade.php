@@ -9,6 +9,8 @@
             <div class="panel-heading">
                 <div class="lead">{{ $advert->title }}</div>
                 <div class="advert-meta text-muted">{{ $advert->user->email }} posted at {{ date('d-m-Y H:i', strtotime($advert->created_at)) }}</div>
+                <div>adv id - {{ $advert->id }}</div>
+                <div>user id - {{ $advert->user->id }}</div>
             </div>
             <table class="table">
                 <tbody>
@@ -18,26 +20,6 @@
                         <td>{{ $advert[$key] }}</td>
                     </tr>
                 @endforeach
-                {{--<tr>--}}
-                {{--<td>Manufacturer:</td>--}}
-                {{--<td>{{ $advert->manufacturer }}</td>--}}
-                {{--</tr>--}}
-                {{--<tr>--}}
-                {{--<td>Model:</td>--}}
-                {{--<td>{{ $advert->model }}</td>--}}
-                {{--</tr>--}}
-                {{--<tr>--}}
-                {{--<td>Engine:</td>--}}
-                {{--<td>{{ $advert->engine }}</td>--}}
-                {{--</tr>--}}
-                {{--<tr>--}}
-                {{--<td>Mileage:</td>--}}
-                {{--<td>{{ $advert->mileage }}</td>--}}
-                {{--</tr>--}}
-                {{--<tr>--}}
-                {{--<td>Owners:</td>--}}
-                {{--<td>{{ $advert->owners }}</td>--}}
-                {{--</tr>--}}
                 </tbody>
             </table>
             <div class="panel-footer">

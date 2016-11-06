@@ -5,7 +5,7 @@ html {
 }
 body {
 	// Margin bottom by fixed navbar height
-	margin-top: 51px;
+	margin-top: 71px;
 	// Margin bottom by footer height
 	margin-bottom: 51px;
 	background: lighten($brand-info, 30%);
@@ -29,9 +29,21 @@ body {
 .dropdown .dropdown-menu {
 	min-width: 100%;
 }
+#flash-messages {
+	margin: 15px 0;
+
+	.alert {
+		padding-left: 0;
+		margin-bottom: 0;
+		border: 0;
+	}
+}
 /*
 * Main Content
 */
+.page-header {
+	margin-top: 4px;
+}
 .container.homepage > .row {
 	position: relative;
 	-webkit-transition: all .25s ease-out;
@@ -77,6 +89,12 @@ body {
 }
 .advert .table td:first-child {
 	width: 150px;
+}
+.pagination {
+	margin: 0;
+}
+.pagination-wrapper {
+	margin: 10px 0;
 }
 /*
 * Footer

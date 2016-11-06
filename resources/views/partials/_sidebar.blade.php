@@ -1,40 +1,44 @@
 <div id="filters-list">
-    {!! Form::open(['action' => 'AdvertController@filter', 'id' => 'filter-form']) !!}
+    {!! Form::open(['action' => 'AdvertController@index', 'id' => 'filter-form']) !!}
 
     <div class="form-group">
-        {!! Form::text('title', old('title'), ['class' => 'form-control', 'placeholder' => 'Title']) !!}
+        {!! Form::label('title', 'Title', ['class' => 'control-label']) !!}
+        {!! Form::text('title', '', ['class' => 'form-control']) !!}
     </div>
 
     <div class="form-group">
-        {{--myTODO: pass array of data--}}
-        <?php $array = ['Ukraine' => 'Ukraine', 'Germany' => 'Germany', 'France' => 'France', 'Italy' => 'Italy', 'USA' => 'USA', "Great Britain" => "Great Britain"] ?>
-        {!! Form::select('region', array('' => 'Select region') + $array , '', ['class' => 'form-control'], old('region')) !!}
+        {!! Form::label('region', 'Region', ['class' => 'control-label']) !!}
+        {!! Form::select('region', [], '', ['class' => 'form-control']) !!}
     </div>
 
     <div class="form-group">
-        {{--myTODO: pass array of data--}}
-        <?php $array = ['Kiev' => 'Kiev', 'Berlin' => 'Berlin', 'Paris' => 'Paris', 'Milan' => 'Milan', 'New York' => 'New York', "London" => "London"] ?>
-        {!! Form::select('city', array('' => 'Select city') + $array , '', ['class' => 'form-control', 'placeholder' => 'placeholder'], old('city')) !!}
+        {!! Form::label('city', 'City', ['class' => 'control-label']) !!}
+        {!! Form::select('city', [], '', ['class' => 'form-control']) !!}
     </div>
 
     <div class="form-group">
-        {!! Form::text('manufacturer', old('manufacturer'), ['class' => 'form-control', 'placeholder' => 'Manufacturer']) !!}
+        {!! Form::label('manufacturer', 'Manufacturer', ['class' => 'control-label']) !!}
+        {!! Form::text('manufacturer', '', ['class' => 'form-control']) !!}
     </div>
 
     <div class="form-group">
-        {!! Form::text('model', old('model'), ['class' => 'form-control', 'placeholder' => 'Model']) !!}
+        {!! Form::label('model', 'Model', ['class' => 'control-label']) !!}
+        {!! Form::text('model', '', ['class' => 'form-control']) !!}
     </div>
 
     <div class="form-group">
-        {!! Form::text('engine', old('engine'), ['class' => 'form-control', 'placeholder' => 'Engine']) !!}
+        {!! Form::label('engine', 'Engine', ['class' => 'control-label']) !!}
+        {!! Form::text('engine', '', ['class' => 'form-control']) !!}
     </div>
 
     <div class="form-group">
-        {!! Form::text('mileage', old('mileage'), ['class' => 'form-control', 'placeholder' => 'Mileage']) !!}
+        {!! Form::label('mileage', 'Mileage', ['class' => 'control-label']) !!}
+        {!! Form::text('mileage', '', ['class' => 'form-control']) !!}
     </div>
 
     <div class="form-group">
-        {!! Form::text('owners', old('owners'), ['class' => 'form-control', 'placeholder' => 'Owners']) !!}
+        {!! Form::label('owners', 'Owners', ['class' => 'control-label']) !!}
+        {!! Form::text('owners', '', ['class' => 'form-control']) !!}
     </div>
 
     {!! Form::submit('Apply', ['class' => 'btn btn-primary']) !!}

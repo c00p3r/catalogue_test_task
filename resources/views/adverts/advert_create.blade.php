@@ -30,9 +30,8 @@
                                 {!! Form::label('region', 'Region', ['class' => 'col-md-4 control-label']) !!}
 
                                 <div class="col-md-6">
-                                    {{-- myTODO: add select2 region list with flags --}}
-                                    <?php $array = ['Ukraine' => 'Ukraine', 'Germany' => 'Germany', 'France' => 'France', 'Italy' => 'Italy', 'USA' => 'USA', "Great Britain" => "Great Britain"] ?>
-                                    {!! Form::select('region', array('' => 'Select region') + $array , '', ['class' => 'form-control', 'required' => 'required'], old('region')) !!}
+
+                                    {!! Form::text('region', old('region'), ['class' => 'form-control', 'required' => 'required']) !!}
 
                                     @if ($errors->has('region'))
                                         <span class="help-block form-error-block">
@@ -46,9 +45,7 @@
                                 {!! Form::label('city', 'City', ['class' => 'col-md-4 control-label']) !!}
 
                                 <div class="col-md-6">
-                                    {{-- myTODO: add select2 city list with flags --}}
-                                    <?php $array = ['Ukraine' => 'Ukraine', 'Germany' => 'Germany', 'France' => 'France', 'Italy' => 'Italy', 'USA' => 'USA', "Great Britain" => "Great Britain"] ?>
-                                    {!! Form::select('city', array('' => 'Select city') + $array , '', ['class' => 'form-control', 'required' => 'required'], old('city')) !!}
+                                    {!! Form::text('city', old('city'), ['class' => 'form-control', 'required' => 'required']) !!}
 
                                     @if ($errors->has('city'))
                                         <span class="help-block form-error-block">

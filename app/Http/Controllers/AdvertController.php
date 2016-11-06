@@ -14,30 +14,74 @@ use Session;
 class AdvertController extends Controller
 {
     /**
+     * @param \Illuminate\Http\Request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $adverts = Advert::orderBy('id', 'desc')->get();
+        if ($request->ajax()) {
+            $data  = $request->all();
+            $query = Advert::query();
 
-        return view('homepage', compact('adverts'));
-    }
+            foreach ($data as $key => $value) {
+                if ($value && ! empty($value) && in_array($key, Advert::FILTERS)) {
+                    $query->where($key, 'like', '%' . $value . '%');
+                }
+            }
 
-    public function create()
-    {
-        $adverts_count = Advert::where('user_id', Auth::id())->count();
+            $adverts = $query->orderBy('id', 'desc')->paginate(10);
 
-        $is_create_allowed = true;
-        if ($adverts_count > 2) {
-            $is_create_allowed = false;
+            return view('adverts._advert_list', compact('adverts'))->render();
+        }
+        $adverts = Advert::orderBy('id', 'desc')->paginate(10);
+
+        $regions = Advert::select('region')->groupBy('region')->get()->toArray();
+
+        $cities = Advert::select('city')->groupBy('city')->get()->toArray();
+
+        function prepare_data($arr, $col_name)
+        {
+            $result = [0 => ['id' => '', 'text' => '']];
+            foreach ($arr as $key => $value) {
+                $key++;
+                $result[ $key ]['id']   = $value[ $col_name ];
+                $result[ $key ]['text'] = $value[ $col_name ];
+            }
+
+            return json_encode($result);
         }
 
-        return view('adverts.advert_create', compact('is_create_allowed'));
+        $regions = prepare_data($regions, 'region');
+
+        $cities = prepare_data($cities, 'city');
+
+        return view('homepage', compact('adverts', 'regions', 'cities'));
+    }
+
+    /**
+     * Returns a view with form for adding new advert
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create()
+    {
+//        check if user don't have 3 adverts already
+        $adverts_count = Advert::where('user_id', Auth::id())->count();
+
+        if ($adverts_count > 3) {
+            Session::flash('flash_type', 'danger');
+            Session::flash('flash_msg', 'Sorry, you can\'t create more than 3 adverts :(');
+
+            return redirect('/');
+        }
+
+        return view('adverts.advert_create');
     }
 
 
     public function add(Request $request)
     {
+//        trimming inputs
         $request->merge(array_map('trim', $request->all()));
 
         $data = $request->all();
@@ -54,16 +98,9 @@ class AdvertController extends Controller
             'picture'      => 'required|image|max:5125',
         ));
 
+//        setting foreign key
         $data['user_id'] = Auth::id();
 
-        $adverts_count = Advert::where('user_id', Auth::id())->count();
-
-        if ($adverts_count > 3) {
-            Session::flash('flash_msg', '');
-            Session::flash('flash_msg_type', 'error');
-
-            return redirect('/');
-        }
         $advert = Advert::create($data);
 
         $pic_name = $advert->savePicture($request->file('picture'));
@@ -77,27 +114,5 @@ class AdvertController extends Controller
         Session::flash('flash_msg_type', 'success');
 
         return redirect('/');
-    }
-
-    public function filter(Request $request)
-    {
-        if ( ! $request->ajax()) {
-            abort(403);
-        }
-        $data = $request->all();
-
-        $query = Advert::query();
-
-        foreach ($data as $key => $value) {
-            if ($value && ! empty($value) && in_array($key, Advert::FILTERS)) {
-                $query->where($key, 'like', '%' . $value . '%');
-            }
-        }
-
-        $adverts = $query->orderBy('id', 'desc')->get();
-
-
-//        Advert::where()->get();
-        return view('adverts._advert_list', compact('adverts'));
     }
 }

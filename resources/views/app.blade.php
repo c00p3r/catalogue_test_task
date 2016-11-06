@@ -12,6 +12,8 @@
 
     <title>{{ config('app.name', 'Site') }} | {{ $page_title or 'Default'}}</title>
 
+    @yield('styles')
+
     @if(config('app.env') == 'production')
         <link rel="stylesheet" href="{{ elixir('css/app.css') }}">
     @else
@@ -23,8 +25,6 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-    @yield('styles')
 </head>
 
 <body class="@yield('body-page-class')">
@@ -46,10 +46,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"             crossorigin="anonymous"></script>
     <script>(typeof $().emulateTransitionEnd == 'function') || document.write('<script src="{{ asset('js/vendor/bootstrap.min.js') }}"><\/script>')</script>
 
+    @yield('scripts')
+
     {{ Html::script('js/all.js') }}
 @endif
-
-@yield('scripts')
 
 </body>
 </html>

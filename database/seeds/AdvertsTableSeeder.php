@@ -14,19 +14,21 @@ class AdvertsTableSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        $upload_path = config('app.upload_path');
+        $upload_folder = config('app.upload_path');
 
-        for ($i = 1; $i <= 20; $i++) {
+        for ($i = 41; $i <= 47; $i++) {
             $user_id       = random_int(1, 5);
             $user_folder   = 'u_' . $user_id;
             $advert_folder = 'adv_' . $i;
-            $path          = $upload_path . '/' . $user_folder . '/' . $advert_folder;
 
-            if (!file_exists($path)) {
-                mkdir($path, 0777, true);
+            $asset_path = $upload_folder . '/' . $user_folder . '/' . $advert_folder;
+            $full_path  = public_path($asset_path);
+
+            if ( ! file_exists($full_path)) {
+                mkdir($full_path, 0777, true);
             }
 
-            $picture = $faker->image($path, 480, 320, 'transport');
+            $picture = $faker->image($full_path, 480, 320, 'transport', false);
 
             $date = $faker->dateTimeThisMonth();
 
@@ -40,7 +42,7 @@ class AdvertsTableSeeder extends Seeder
                 'engine'       => random_int(3, 8) / 2,
                 'mileage'      => random_int(1000, 1000000),
                 'owners'       => random_int(1, 5),
-                'picture'      => $picture,
+                'picture'      => $asset_path . '/' . $picture,
                 'created_at'   => $date,
                 'updated_at'   => $date,
             ]);
