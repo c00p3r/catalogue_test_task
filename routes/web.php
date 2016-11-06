@@ -15,6 +15,8 @@ Auth::routes();
 
 Route::get('/', 'AdvertController@index');
 
+Route::post('/filter', 'AdvertController@filter');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/advert/create', 'AdvertController@create');
     Route::post('/advert/add', 'AdvertController@add');

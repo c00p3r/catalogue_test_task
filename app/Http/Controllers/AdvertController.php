@@ -18,16 +18,21 @@ class AdvertController extends Controller
      */
     public function index()
     {
-        $adverts = Advert::all();
+        $adverts = Advert::orderBy('id', 'desc')->get();
 
         return view('homepage', compact('adverts'));
     }
 
     public function create()
     {
-        $advert = new Advert;
+        $adverts_count = Advert::where('user_id', Auth::id())->count();
 
-        return view('advert_create', compact('advert'));
+        $is_create_allowed = true;
+        if ($adverts_count > 2) {
+            $is_create_allowed = false;
+        }
+
+        return view('adverts.advert_create', compact('is_create_allowed'));
     }
 
 
@@ -51,9 +56,18 @@ class AdvertController extends Controller
 
         $data['user_id'] = Auth::id();
 
+        $adverts_count = Advert::where('user_id', Auth::id())->count();
+
+        if ($adverts_count > 3) {
+            Session::flash('flash_msg', '');
+            Session::flash('flash_msg_type', 'error');
+
+            return redirect('/');
+        }
         $advert = Advert::create($data);
 
         $pic_name = $advert->savePicture($request->file('picture'));
+
         if ($pic_name) {
             $advert->picture = $pic_name;
             $advert->save();
@@ -63,5 +77,27 @@ class AdvertController extends Controller
         Session::flash('flash_msg_type', 'success');
 
         return redirect('/');
+    }
+
+    public function filter(Request $request)
+    {
+        if ( ! $request->ajax()) {
+            abort(403);
+        }
+        $data = $request->all();
+
+        $query = Advert::query();
+
+        foreach ($data as $key => $value) {
+            if ($value && ! empty($value) && in_array($key, Advert::FILTERS)) {
+                $query->where($key, 'like', '%' . $value . '%');
+            }
+        }
+
+        $adverts = $query->orderBy('id', 'desc')->get();
+
+
+//        Advert::where()->get();
+        return view('adverts._advert_list', compact('adverts'));
     }
 }

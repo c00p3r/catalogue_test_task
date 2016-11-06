@@ -9,3 +9,4 @@ Homestead.yaml
 _ide_helper.php
 /public/_front/css/app.css.map
 /public/_front/js/all.js.map
+/public/uploads/*

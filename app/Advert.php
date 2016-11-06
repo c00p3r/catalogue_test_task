@@ -8,8 +8,14 @@ use Illuminate\Http\UploadedFile;
 
 class Advert extends Model
 {
+    const FILTERS = [
+        'title', 'region', 'city', 'manufacturer', 'model', 'engine', 'mileage', 'owners',
+    ];
     protected $fillable = [
         'user_id', 'title', 'region', 'city', 'manufacturer', 'model', 'engine', 'mileage', 'owners',
+    ];
+    protected $display_list = [
+        'title', 'region', 'city', 'manufacturer', 'model', 'engine', 'mileage', 'owners',
     ];
 
     protected static function boot()
