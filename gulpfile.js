@@ -20,10 +20,10 @@ elixir(function (mix) {
 
     if (elixir.config.production) {
         mix
-            .webpack(['app.js', './public/js/all.js'], './public/js/bundle.js');
-        // .version([
-        //     './public/css/app.css',
-        //     './public/js/bundle.js'
-        // ]);
+        // .webpack(['app.js', './public/js/all.js'], './public/js/bundle.js');
+            .version([
+                './public/css/app.css',
+                './public/js/all.js'
+            ]);
     }
 });

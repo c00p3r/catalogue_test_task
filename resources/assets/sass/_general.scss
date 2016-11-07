@@ -52,6 +52,8 @@ body {
 }
 .row-offcanvas {
 	left: 0;
+	// defining min height equal to height of sidebar to prevent sidebar overflow body
+	min-height: 680px;
 }
 .row-offcanvas.active {
 	left: 50%;

@@ -2,12 +2,12 @@
 
 
 @section('styles')
-    {{ Html::style('plugins\select2-4.0.3\css\select2.min.css') }}
-    {{ Html::style('plugins\select2-4.0.3\css\select2-bootstrap.css') }}
+    {{ Html::style('plugins/select2-4.0.3/css/select2.min.css') }}
+    {{ Html::style('plugins/select2-4.0.3/css/select2-bootstrap.css') }}
 @stop
 
 @section('scripts')
-    {{ Html::script('plugins\select2-4.0.3\js\select2.min.js') }}
+    {{ Html::script('plugins/select2-4.0.3/js/select2.min.js') }}
 
     <script>
         $(function () {

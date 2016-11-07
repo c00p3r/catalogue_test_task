@@ -37,19 +37,20 @@
 
 @include('partials._footer')
 
-@if (config('app.env') == 'production')
-    <script src="{{ elixir('js/bundle.js') }}"></script>
-@else
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="{{ asset('js/vendor/jquery.min.js') }}"><\/script>')</script>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"             crossorigin="anonymous"></script>
     <script>(typeof $().emulateTransitionEnd == 'function') || document.write('<script src="{{ asset('js/vendor/bootstrap.min.js') }}"><\/script>')</script>
 
-    @yield('scripts')
-
+@if (config('app.env') == 'production')
+    <script src="{{ elixir('js/all.js') }}"></script>
+@else
     {{ Html::script('js/all.js') }}
 @endif
+
+@yield('scripts')
 
 </body>
 </html>

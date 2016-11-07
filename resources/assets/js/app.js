@@ -1,5 +1,4 @@
-require('jquery');
+window.$ = window.jQuery = require('jquery');
 
-require('bootstrap-sass');
-
-require('select2');
+import "bootstrap-sass";
+import "select2";
