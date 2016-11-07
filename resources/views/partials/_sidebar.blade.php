@@ -28,17 +28,47 @@
 
     <div class="form-group">
         {!! Form::label('engine', 'Engine', ['class' => 'control-label']) !!}
-        {!! Form::text('engine', '', ['class' => 'form-control']) !!}
+        <div class="row">
+            <div class="col-xs-5">
+                {!! Form::text('engine_min', '', ['class' => 'form-control']) !!}
+            </div>
+            <div class="col-xs-2">
+                <span>&mdash;</span>
+            </div>
+            <div class="col-xs-5">
+                {!! Form::text('engine_max', '', ['class' => 'form-control']) !!}
+            </div>
+        </div>
     </div>
 
     <div class="form-group">
         {!! Form::label('mileage', 'Mileage', ['class' => 'control-label']) !!}
-        {!! Form::text('mileage', '', ['class' => 'form-control']) !!}
+        <div class="row">
+            <div class="col-xs-5">
+                {!! Form::text('mileage_min', '', ['class' => 'form-control']) !!}
+            </div>
+            <div class="col-xs-2">
+                <span>&mdash;</span>
+            </div>
+            <div class="col-xs-5">
+                {!! Form::text('mileage_max', '', ['class' => 'form-control']) !!}
+            </div>
+        </div>
     </div>
 
     <div class="form-group">
         {!! Form::label('owners', 'Owners', ['class' => 'control-label']) !!}
-        {!! Form::text('owners', '', ['class' => 'form-control']) !!}
+        <div class="row">
+            <div class="col-xs-5">
+                {!! Form::text('owners_min', '', ['class' => 'form-control']) !!}
+            </div>
+            <div class="col-xs-2">
+                <span>&mdash;</span>
+            </div>
+            <div class="col-xs-5">
+                {!! Form::text('owners_max', '', ['class' => 'form-control']) !!}
+            </div>
+        </div>
     </div>
 
     {!! Form::submit('Apply', ['class' => 'btn btn-primary']) !!}

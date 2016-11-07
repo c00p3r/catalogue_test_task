@@ -9,7 +9,7 @@ use Illuminate\Http\UploadedFile;
 class Advert extends Model
 {
     const FILTERS = [
-        'title', 'region', 'city', 'manufacturer', 'model', 'engine', 'mileage', 'owners',
+        'title', 'region', 'city', 'manufacturer', 'model', 'engine_min', 'engine_max', 'mileage_min', 'mileage_max', 'owners_min', 'owners_max',
     ];
     protected $fillable = [
         'user_id', 'title', 'region', 'city', 'manufacturer', 'model', 'engine', 'mileage', 'owners',

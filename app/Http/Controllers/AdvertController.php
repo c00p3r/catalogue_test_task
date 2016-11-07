@@ -19,21 +19,33 @@ class AdvertController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->ajax()) {
-            $data  = $request->all();
-            $query = Advert::query();
+        $data  = $request->all();
+        $query = Advert::query();
 
-            foreach ($data as $key => $value) {
-                if ($value && ! empty($value) && in_array($key, Advert::FILTERS)) {
+        foreach ($data as $key => $value) {
+            if ($value && ! empty($value) && in_array($key, Advert::FILTERS)) {
+                $chunk = explode('_', $key);
+                if ($chunk && (in_array('max', $chunk) || in_array('min', $chunk))) {
+                    if (in_array('max', $chunk)) {
+                        array_pop($chunk);
+                        $col_name = implode('_', $chunk);
+                        $query->where($col_name, '<', $value);
+                    }
+                    if (in_array('min', $chunk)) {
+                        array_pop($chunk);
+                        $col_name = implode('_', $chunk);
+                        $query->where($col_name, '>', $value);
+                    }
+                } else {
                     $query->where($key, 'like', '%' . $value . '%');
                 }
             }
-
-            $adverts = $query->orderBy('id', 'desc')->paginate(10);
-
-            return view('adverts._advert_list', compact('adverts'))->render();
         }
-        $adverts = Advert::orderBy('id', 'desc')->paginate(10);
+
+        $adverts = $query->orderBy('id', 'desc')->paginate(10);
+
+        $adverts_html = view('adverts._advert_list', compact('adverts'))->render();
+
 
         $regions = Advert::select('region')->groupBy('region')->get()->toArray();
 
@@ -54,8 +66,11 @@ class AdvertController extends Controller
         $regions = prepare_data($regions, 'region');
 
         $cities = prepare_data($cities, 'city');
+        if ($request->ajax()) {
+            return $adverts_html;
+        }
 
-        return view('homepage', compact('adverts', 'regions', 'cities'));
+        return view('homepage', compact('adverts_html', 'regions', 'cities'));
     }
 
     /**

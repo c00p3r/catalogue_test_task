@@ -4,7 +4,6 @@
 $(function () {
     var $row = $('.row-offcanvas');
     var $form = $('#filter-form');
-    var url = $form.attr('action');
 
     $('.alert').on('closed.bs.alert', function () {
         if (!$.trim($('.container', '#flash-messages').html())) {
@@ -19,7 +18,7 @@ $(function () {
 
     // Filtering view with ajax
     $form.on('submit', function () {
-        getFiltered(url, $form.serialize());
+        getFiltered($form.serialize());
         $row.toggleClass('active');
         return false;
     });
@@ -27,7 +26,7 @@ $(function () {
     // Resetting view with ajax after form reset
     $('#reset-filter', $form).click(function () {
         var data = {_token: $form.find('[name=_token]').val()};
-        getFiltered(url, data);
+        getFiltered(data);
         $row.toggleClass('active');
     });
 
@@ -40,7 +39,7 @@ $(function () {
             processing = true;
 
             $.ajax({
-                url: '?page=' + page
+                data: $form.serialize() + '&page=' + page
             }).success(function (response) {
                 $('#content').html(response);
                 location.hash = page;
@@ -53,10 +52,9 @@ $(function () {
     })
 });
 
-function getFiltered(url, request) {
+function getFiltered(request) {
     $.ajax({
         'method': 'post',
-        'url': url,
         'data': request,
         beforeSend: function () {
             $('#content').empty();

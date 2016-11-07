@@ -6,7 +6,7 @@
                 <span class="glyphicon glyphicon-menu-hamburger"></span>
             </a>
 
-            <a class="btn btn-default navbar-toggle navbar-btn toggle-sidebar" data-toggle="button">
+            <a class="btn btn-default navbar-toggle navbar-btn toggle-sidebar">
                 <span class="glyphicon glyphicon-search"></span>
             </a>
 
@@ -42,7 +42,7 @@
                 @endif
             </ul>
 
-            <a class="btn btn-default navbar-btn navbar-right toggle-sidebar hidden-xs" data-toggle="button">Filter</a>
+            <a class="btn btn-default navbar-btn navbar-right toggle-sidebar hidden-xs">Filter</a>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>

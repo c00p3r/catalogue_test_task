@@ -9,8 +9,6 @@
             <div class="panel-heading">
                 <div class="lead">{{ $advert->title }}</div>
                 <div class="advert-meta text-muted">{{ $advert->user->email }} posted at {{ date('d-m-Y H:i', strtotime($advert->created_at)) }}</div>
-                <div>adv id - {{ $advert->id }}</div>
-                <div>user id - {{ $advert->user->id }}</div>
             </div>
             <table class="table">
                 <tbody>

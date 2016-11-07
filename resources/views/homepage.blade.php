@@ -32,7 +32,7 @@
                     <img id="ajax-loader" class="hidden" src="{{ asset('img/ajax-loader.gif') }}" alt="loading">
                 </div>
                 <div id="content">
-                    @include('adverts._advert_list')
+                    {!! $adverts_html !!}
                 </div>
             </div>
         </div>
