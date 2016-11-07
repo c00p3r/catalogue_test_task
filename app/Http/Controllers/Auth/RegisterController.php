@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * Class RegisterController
+ * @package App\Http\Controllers\Auth
+ */
 class RegisterController extends Controller
 {
     /*
@@ -23,6 +27,7 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers {
+        // remove conflict
         register as trait_register;
     }
     /**
@@ -34,16 +39,21 @@ class RegisterController extends Controller
 
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
         $this->middleware('guest');
     }
 
+    /**
+     * Extending trait method 'register'
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
     public function register(Request $request)
     {
+        // Trimming input
         Input::merge(array_map('trim', Input::all()));
 
         return $this->trait_register($request);

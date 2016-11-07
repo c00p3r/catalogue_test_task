@@ -5,6 +5,7 @@ $(function () {
     var $row = $('.row-offcanvas');
     var $form = $('#filter-form');
 
+    // Removing flash messages wrappers if all messages are closed
     $('.alert').on('closed.bs.alert', function () {
         if (!$.trim($('.container', '#flash-messages').html())) {
             $('#flash-messages').remove();
@@ -36,6 +37,7 @@ $(function () {
         if (!processing) {
             var page = $(this).attr('href').split('page=')[1];
 
+            // variable needed to restrict multiple requests
             processing = true;
 
             $.ajax({

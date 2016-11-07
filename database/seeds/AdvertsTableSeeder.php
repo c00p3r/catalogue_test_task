@@ -16,7 +16,7 @@ class AdvertsTableSeeder extends Seeder
 
         $upload_folder = config('app.upload_path');
 
-        for ($i = 1; $i <= 20; $i++) {
+        for ($i = 1; $i <= 25; $i++) {
             $user_id       = random_int(1, 5);
             $user_folder   = 'u_' . $user_id;
             $advert_folder = 'adv_' . $i;

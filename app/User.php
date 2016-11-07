@@ -32,6 +32,8 @@ class User extends Authenticatable
     ];
 
     /**
+     * Defines DB relationship
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function adverts()

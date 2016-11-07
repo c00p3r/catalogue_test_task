@@ -6,14 +6,31 @@ use Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 
+/**
+ * Class Advert
+ * @package App
+ */
 class Advert extends Model
 {
+    /**
+     * list of available filters
+     */
     const FILTERS = [
         'title', 'region', 'city', 'manufacturer', 'model', 'engine_min', 'engine_max', 'mileage_min', 'mileage_max', 'owners_min', 'owners_max',
     ];
+    /**
+     * list of model fields that are mass assignable
+     *
+     * @var array
+     */
     protected $fillable = [
         'user_id', 'title', 'region', 'city', 'manufacturer', 'model', 'engine', 'mileage', 'owners',
     ];
+    /**
+     * list of model fields that are displayed to user
+     *
+     * @var array
+     */
     protected $display_list = [
         'title', 'region', 'city', 'manufacturer', 'model', 'engine', 'mileage', 'owners',
     ];
@@ -28,11 +45,23 @@ class Advert extends Model
         });
     }
 
+    /**
+     * Defines DB relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Saves advert picture to unique directory
+     * convention is: <upload_folder>/<user_folder>/<advert_folder>/
+     *
+     * @param UploadedFile $file
+     * @return bool|string
+     */
     public function savePicture(UploadedFile $file)
     {
         $uploads_path  = config('app.upload_path');
@@ -54,12 +83,20 @@ class Advert extends Model
         return false;
     }
 
-//    public function getPictureAttribute($value)
-//    {
-//        if (file_exists($value)) {
-//            return $value;
-//        }
-//        return config('app.upload_path') . '/no_image.png';
-//    }
+    /**
+     * Model accessor for picture field
+     * Checks if picture exists else returns dummy picture
+     *
+     * @param $value
+     * @return string
+     */
+    public function getPictureAttribute($value)
+    {
+        if (file_exists($value)) {
+            return $value;
+        }
+
+        return '/img/no_image.png';
+    }
 }
 

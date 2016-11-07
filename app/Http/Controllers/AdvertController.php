@@ -94,6 +94,12 @@ class AdvertController extends Controller
     }
 
 
+    /**
+     * Ads new advert to DB and redirects user with flash message
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function add(Request $request)
     {
 //        trimming inputs
@@ -118,6 +124,9 @@ class AdvertController extends Controller
 
         $advert = Advert::create($data);
 
+        // saving picture after creation of DB record
+        // to retrieve record ID
+        // which is used to create separate unique folder for each advert
         $pic_name = $advert->savePicture($request->file('picture'));
 
         if ($pic_name) {
@@ -126,7 +135,7 @@ class AdvertController extends Controller
         }
 
         Session::flash('flash_msg', 'Advert created successfully');
-        Session::flash('flash_msg_type', 'success');
+        Session::flash('flash_type', 'success');
 
         return redirect('/');
     }
