@@ -1,4 +1,4 @@
-# QATestlab Test Task
+# Test Task
 ##Требования:
 * PHP >= 5.6.4
 * mySQL
